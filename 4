@@ -1,0 +1,66 @@
+class Vehiculo:
+
+    def __init__(self, marca, modelo, anio):
+        self.marca = marca
+        self.modelo = modelo
+        self.anio = anio
+
+    def imprimir_detalles(self):
+        print(f"Marca: {self.marca}")
+        print(f"Modelo: {self.modelo}")
+        print(f"Año: {self.anio}")
+
+
+class Automovil(Vehiculo):
+
+    def __init__(self, marca, modelo, anio, kilometros, litros):
+        super().__init__(marca, modelo, anio)
+        self.kilometros = kilometros
+        self.litros = litros
+
+    def calcular_eficiencia(self):
+        return self.kilometros / self.litros
+
+    def combustible_viaje(self, distancia):
+        return distancia / self.calcular_eficiencia()
+
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"Kilómetros recorridos: {self.kilometros}")
+        print(f"Litros consumidos: {self.litros}")
+        print(f"Eficiencia: {self.calcular_eficiencia():.2f} km/L")
+        print(f"Combustible para 300 km: {self.combustible_viaje(300):.2f} L")
+
+
+class Motocicleta(Vehiculo):
+
+    def __init__(self, marca, modelo, anio, kilometros, litros):
+        super().__init__(marca, modelo, anio)
+        self.kilometros = kilometros
+        self.litros = litros
+
+    def calcular_eficiencia(self):
+        return self.kilometros / self.litros
+
+    def combustible_viaje(self, distancia):
+        return distancia / self.calcular_eficiencia()
+
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"Kilómetros recorridos: {self.kilometros}")
+        print(f"Litros consumidos: {self.litros}")
+        print(f"Eficiencia: {self.calcular_eficiencia():.2f} km/L")
+        print(f"Combustible para 300 km: {self.combustible_viaje(300):.2f} L")
+
+
+# Ejemplo de uso:
+
+if __name__ == "__main__":
+
+    auto = Automovil("Toyota", "Corolla", 2022, 600, 40)
+    auto.imprimir_detalles()
+
+    print()  # Línea en blanco para separar
+
+    moto = Motocicleta("Honda", "CB190R", 2023, 450, 15)
+    moto.imprimir_detalles()
