@@ -1,0 +1,46 @@
+class Empleado:
+    def __init__(self, nombre, salario, cargo):
+        self.nombre = nombre
+        self.salario = salario
+        self.cargo = cargo
+    
+    def imprimir_detalles(self):
+        print(f"Empleado: {self.nombre}")
+        print(f"Cargo: {self.cargo}")
+        print(f"Salario: {self.salario:.2f}")
+
+class Gerente(Empleado):
+    def __init__(self, nombre, salario, departamento):
+        super().__init__(nombre, salario, "Gerente")
+        self.departamento = departamento
+    
+    def calcular_aumento(self):
+        return self.salario * 0.15
+    
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"Departamento: {self.departamento}")
+        print(f"Aumento de Salario: {self.calcular_aumento():.2f}")
+
+class EmpleadoTemporal(Empleado):
+    def __init__(self, nombre, salario, meses_contrato):
+        super().__init__(nombre, salario, "Empleado Temporal")
+        self.meses_contrato = meses_contrato
+    
+    def calcular_aumento(self):
+        if self.meses_contrato > 6:
+            return self.salario * 0.05
+        return self.salario * 0.02
+    
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"Meses de Contrato: {self.meses_contrato}")
+        print(f"Aumento de Salario: {self.calcular_aumento():.2f}")
+
+if __name__ == "__main__":
+    g = Gerente("Ana Martínez", 5000, "Ventas")
+    g.imprimir_detalles()
+    print()  
+
+    et = EmpleadoTemporal("Carlos Ruiz", 2000, 8)
+    et.imprimir_detalles()
