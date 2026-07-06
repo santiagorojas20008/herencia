@@ -1,0 +1,49 @@
+class Transporte:
+
+    def __init__(self, capacidad, velocidad_maxima):
+        self.capacidad = capacidad
+        self.velocidad_maxima = velocidad_maxima
+
+    def calcular_tiempo_viaje(self, distancia):
+        return distancia / self.velocidad_maxima
+
+    def imprimir_detalles(self):
+        print(f"Capacidad: {self.capacidad} pasajeros")
+        print(f"Velocidad máxima: {self.velocidad_maxima} km/h")
+
+
+class Avion(Transporte):
+
+    def __init__(self, capacidad, velocidad_maxima, aerolinea):
+        super().__init__(capacidad, velocidad_maxima)
+        self.aerolinea = aerolinea
+
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"Aerolínea: {self.aerolinea}")
+        print(f"Tiempo para recorrer 1200 km: {self.calcular_tiempo_viaje(1200):.2f} horas")
+
+
+class Barco(Transporte):
+
+    def __init__(self, capacidad, velocidad_maxima, tipo):
+        super().__init__(capacidad, velocidad_maxima)
+        self.tipo = tipo
+
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"Tipo: {self.tipo}")
+        print(f"Tiempo para recorrer 1200 km: {self.calcular_tiempo_viaje(1200):.2f} horas")
+
+
+# Ejemplo de uso:
+
+if __name__ == "__main__":
+
+    avion = Avion(180, 900, "Aerolíneas Argentinas")
+    avion.imprimir_detalles()
+
+    print()  # Línea en blanco para separar
+
+    barco = Barco(250, 50, "Crucero")
+    barco.imprimir_detalles()
