@@ -1,0 +1,64 @@
+from datetime import datetime
+
+
+class Producto:
+
+    def __init__(self, nombre, precio, fecha_vencimiento):
+        self.nombre = nombre
+        self.precio = precio
+        self.fecha_vencimiento = fecha_vencimiento
+
+    def imprimir_detalles(self):
+        print(f"Nombre: {self.nombre}")
+        print(f"Precio: ${self.precio:.2f}")
+        print(f"Fecha de vencimiento: {self.fecha_vencimiento}")
+
+
+class ProductoAlimenticio(Producto):
+
+    def __init__(self, nombre, precio, fecha_vencimiento):
+        super().__init__(nombre, precio, fecha_vencimiento)
+
+    def aplicar_descuento(self):
+        fecha_actual = datetime.now().date()
+        fecha_venc = datetime.strptime(self.fecha_vencimiento, "%Y-%m-%d").date()
+
+        if (fecha_venc - fecha_actual).days <= 7:
+            return self.precio * 0.80
+        else:
+            return self.precio
+
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"Precio con descuento: ${self.aplicar_descuento():.2f}")
+
+
+class ProductoElectronico(Producto):
+
+    def __init__(self, nombre, precio, fecha_vencimiento, en_oferta):
+        super().__init__(nombre, precio, fecha_vencimiento)
+        self.en_oferta = en_oferta
+
+    def aplicar_descuento(self):
+        if self.en_oferta:
+            return self.precio * 0.90
+        else:
+            return self.precio
+
+    def imprimir_detalles(self):
+        super().imprimir_detalles()
+        print(f"En oferta: {self.en_oferta}")
+        print(f"Precio con descuento: ${self.aplicar_descuento():.2f}")
+
+
+# Ejemplo de uso:
+
+if __name__ == "__main__":
+
+    alimento = ProductoAlimenticio("Leche", 2500, "2026-07-10")
+    alimento.imprimir_detalles()
+
+    print()  # Línea en blanco para separar
+
+    electronico = ProductoElectronico("Auriculares", 80000, "2030-12-31", True)
+    electronico.imprimir_detalles()
